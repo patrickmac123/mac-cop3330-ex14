@@ -11,6 +11,29 @@ import java.text.NumberFormat;
 public class App
 {
     private static final double percentage = 0.055;
+    static void calculate(String state,double order)
+    {
+        double tax;
+        double total;
+        if(state.equals("WI"))
+        {
+
+            tax = order * percentage;
+            total = order + (order * percentage);
+            BigDecimal formattedTax = new BigDecimal(tax).setScale(2, RoundingMode.FLOOR);
+            NumberFormat defaultTax = NumberFormat.getCurrencyInstance();
+
+            BigDecimal formattedTotal = new BigDecimal(total).setScale(2, RoundingMode.HALF_UP);
+            NumberFormat defaultFormat = NumberFormat.getCurrencyInstance();
+
+            System.out.println("The tax is "+defaultTax.format(formattedTax)+".\n"+"The total is "+defaultFormat.format(formattedTotal)+".");
+            return;
+        }
+
+        BigDecimal formattedTotal = new BigDecimal(order).setScale(2, RoundingMode.HALF_UP);
+        NumberFormat defaultFormat = NumberFormat.getCurrencyInstance();
+        System.out.println("The total is "+defaultFormat.format(formattedTotal)+".");
+    }
     public static void main( String[] args )
     {
         Scanner scan = new Scanner(System.in);
@@ -20,23 +43,7 @@ public class App
         String stringState = scan.nextLine();
 
         double order = Double.parseDouble(stringOrder);
-        double total = order;
-        double tax;
 
-        if(stringState.equals("WI"))
-        {
-
-        tax = order * percentage;
-        total = order + (order * percentage);
-        BigDecimal formatedTax = BigDecimal.valueOf(tax);
-        new BigDecimal(formatedTax.toPlainString()).setScale(2, RoundingMode.FLOOR);
-        NumberFormat defaultTax = NumberFormat.getCurrencyInstance();
-        System.out.println("The tax is "+defaultTax.format(formatedTax)+".");
-        }
-
-        BigDecimal formatedTotal = new BigDecimal(total).setScale(2, RoundingMode.HALF_UP);
-        NumberFormat defaultFormat = NumberFormat.getCurrencyInstance();
-
-        System.out.println("The total is "+defaultFormat.format(formatedTotal)+".");
+        calculate(stringState,order);
     }
 }
