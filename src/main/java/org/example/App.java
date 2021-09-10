@@ -20,7 +20,7 @@ public class App
 
             tax = order * percentage;
             total = order + (order * percentage);
-            BigDecimal formattedTax = new BigDecimal(tax).setScale(2, RoundingMode.FLOOR);
+            BigDecimal formattedTax = new BigDecimal(tax).setScale(2, RoundingMode.HALF_UP);
             NumberFormat defaultTax = NumberFormat.getCurrencyInstance();
 
             BigDecimal formattedTotal = new BigDecimal(total).setScale(2, RoundingMode.HALF_UP);
